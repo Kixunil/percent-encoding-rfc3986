@@ -9,6 +9,10 @@ edition = "2018"
 keywords = ["encoding", "decoding", "escaping", "rfc3986"]
 categories = ["encoding", "no-std", "parser-implementations", "web-programming"]
 
+[package.metadata.docs.rs]
+features = ["std"]
+rustc-args = ["--cfg", "docsrs"]
+
 [features]
 default = ["alloc"]
 alloc = []
