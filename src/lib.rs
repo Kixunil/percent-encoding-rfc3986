@@ -125,7 +125,7 @@ impl AsciiSet {
     }
 
     fn should_percent_encode(&self, byte: u8) -> bool {
-        !byte.is_ascii() || self.contains(byte)
+        byte == b'%' || !byte.is_ascii() || self.contains(byte)
     }
 
     pub const fn add(&self, byte: u8) -> Self {
@@ -569,6 +569,13 @@ mod tests {
     use super::percent_decode;
     use quickcheck::{quickcheck, TestResult};
     use alloc::vec::Vec;
+    use alloc::string::ToString;
+
+    #[test]
+    fn encode_percent() {
+        const SET: super::AsciiSet = super::CONTROLS.remove(b'%');
+        assert_eq!(super::utf8_percent_encode("%", &SET).to_string(), "%25");
+    }
 
     /// Makes it easier to declare test cases
     macro_rules! decoding_test_cases_success {
