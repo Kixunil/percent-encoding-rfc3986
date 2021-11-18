@@ -74,12 +74,16 @@
 //!
 //! * `alloc` - turned on by default, enables integration with types from the `alloc` crate such as
 //!             `Vec<u8>`, `String`, and `Cow<'a, str>`.
+//! * `std` - implements `std::error::Error` for error types. Implies `alloc`
 
 #![no_std]
 #![cfg_attr(docsrs, feature(doc_cfg))]
 
 #[cfg(feature = "alloc")]
 extern crate alloc;
+
+#[cfg(feature = "std")]
+extern crate std;
 
 mod error;
 

@@ -24,3 +24,7 @@ impl fmt::Display for PercentDecodeError {
         }
     }
 }
+
+#[cfg(feature = "std")]
+#[cfg_attr(docsrs, doc(cfg(feature = "std")))]
+impl std::error::Error for PercentDecodeError {}
